@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <title>Sticky – Idle-Animationsstudie 01</title>
+  <defs>
+    <style>
+      .body { transform-box: fill-box; transform-origin: 50% 100%; animation: breathe 3.2s steps(4,end) infinite; }
+      .lid { opacity: 0; animation: blink 4.6s steps(1,end) infinite; }
+      @keyframes breathe {
+        0%,100% { transform: translateY(0) scaleY(1); }
+        50% { transform: translateY(-0.6px) scaleY(1.018); }
+      }
+      @keyframes blink {
+        0%, 42%, 45%, 100% { opacity: 0; }
+        43%, 44% { opacity: 1; }
+      }
+    </style>
+  </defs>
+  <g class="body">
+    <image x="0" y="0" width="64" height="64" xlink:href="sticky_DMG_64x64.svg"/>
+  </g>
+  <!-- Minimal eyelid line, using the original DMG darkest shade -->
+  <g class="lid" fill="#081820">
+    <rect x="35" y="28" width="4" height="1"/>
+    <rect x="42" y="27" width="4" height="1"/>
+  </g>
+</svg>
