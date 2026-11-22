@@ -1,0 +1,26 @@
+name: Temporary Sticky PNG transfer
+
+on:
+  push:
+    paths:
+      - ".github/workflows/temporary-sticky-transfer.yml"
+      - "sticky_original.png"
+
+permissions:
+  contents: read
+
+jobs:
+  package-original:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out reference repository
+        uses: actions/checkout@v4
+      - name: Verify original PNG
+        run: file sticky_original.png && test -s sticky_original.png
+      - name: Upload original PNG as temporary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sticky-original-transfer
+          path: sticky_original.png
+          retention-days: 1
+          if-no-files-found: error
