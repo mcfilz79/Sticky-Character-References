@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" shape-rendering="crispEdges">
+<title>Sticky – Gameplay Idle</title>
+<desc>20x20 pixel-art idle loop. Five poses: 01, 02, 03, 02, 01. Each pose lasts 400 ms. Body bobs vertically by one pixel; hands move in the opposite direction. Feet stay fixed. Transparent background.</desc>
+<g id="body">
+<image width="20" height="20" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA5ElEQVR42mNgoDJgxCfJb8H/n4GBgYGHh4fhy5cvcPrjiY+MJBvIb8H/v6YEwbc3mABnu8YU4DSUCZdhPDw8OF2+e8kEuOuJMpCHh4ehIOMLhuvMVBIZGBgYGCycknEaitXAL1++YIiZKicw9PT0MHz+/JmhK6+LwVQ5gYFoF2IDp+8uYCibVMbAy8vL0NDQwHD67gLSDGzpwRJ2GyFe33dhMk6LsRqIHIPIscvLy0tUTONMNgZJBv9P3Zn/3yDJ4L9BksF/fgv+/6fuzP+PK4aJTtiSkpIMz58/x+qDUTAKRgQAAOGtUxy/IPnZAAAAAElFTkSuQmCC"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 1;0 0;0 -1;0 0" keyTimes="0;0.2;0.4;0.6;0.8" calcMode="discrete" dur="2s" repeatCount="indefinite"/>
+</g>
+<g id="left-hand">
+<image width="20" height="20" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAATUlEQVR42mNgGAWjgDzAb8H/3yDJ4D/VDDt1Z/7/////U8VQJgYGBoaLDwoYmhYzU8WBTAwMDAz6ChMYPK3mUjcM+S34/4+mplEwXAAAoDEVYzfBwXQAAAAASUVORK5CYII="/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -1;0 0;0 1;0 0" keyTimes="0;0.2;0.4;0.6;0.8" calcMode="discrete" dur="2s" repeatCount="indefinite"/>
+</g>
+<g id="right-hand">
+<image width="20" height="20" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQklEQVR42mNgGAWjYOABIzUMMUgy+H//2n0GBgYGBhZquaynhYFBX2ECAxO1DLx58zODa0wB9Qzcc1ZvNAGNgkEDAJBKC7v72f4sAAAAAElFTkSuQmCC"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -1;0 0;0 1;0 0" keyTimes="0;0.2;0.4;0.6;0.8" calcMode="discrete" dur="2s" repeatCount="indefinite"/>
+</g>
+<g id="feet">
+<image width="20" height="20" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAP0lEQVR42mNgGAWjYBSMAiyAkVQN/Bb8/2Hsjyc+YuhnIsew3UsmYBhOFuC34P9vkGTwHwawGUiRl3F5e4QBAMQ9GQHCZO4/AAAAAElFTkSuQmCC"/>
+<image width="20" height="20" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQklEQVR42mNgGAWjYBSMAnoARlwS/Bb8/2Hsjyc+MhJrIBM+w3YvmYBhOFmA34L/PwwYJBn8J8VARkLeJdXLgx8AAFRqGQFdaIr/AAAAAElFTkSuQmCC"/>
+</g>
+</svg>
