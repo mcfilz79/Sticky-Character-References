@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400" viewBox="0 0 20 20" shape-rendering="crispEdges">
+<title>Sticky – Gameplay Idle aus share-1.png</title>
+<desc>Originalteile werden direkt aus share-1.png ausgeschnitten und getrennt animiert. Transparenter Hintergrund, drei dezente Körperposen, gegenläufige Handbewegung, Füße bleiben fest.</desc>
+<defs>
+ <g id="source"><image x="0" y="0" width="20" height="20" xlink:href="https://raw.githubusercontent.com/mcfilz79/Sticky-Character-References/main/share-1.png" preserveAspectRatio="none"/></g>
+</defs>
+<g id="feet">
+ <svg x="5" y="14" width="5.05" height="4.04" viewBox="191 537 194 155" preserveAspectRatio="none"><use xlink:href="#source"/></svg>
+ <svg x="11" y="13" width="5.03" height="4.06" viewBox="422 498 193 156" preserveAspectRatio="none"><use xlink:href="#source"/></svg>
+</g>
+<g id="body">
+ <svg x="5" y="1" width="11.04" height="10.03" viewBox="191 38 424 385" preserveAspectRatio="none"><use xlink:href="#source"/></svg>
+ <animateTransform attributeName="transform" type="translate" values="0 0;0 .5;0 0;0 -.5;0 0" keyTimes="0;.25;.5;.75;1" calcMode="discrete" dur="1.6s" repeatCount="indefinite"/>
+</g>
+<g id="left-hand">
+ <svg x="0" y="7" width="4.01" height="5.05" viewBox="0 268 154 194" preserveAspectRatio="none"><use xlink:href="#source"/></svg>
+ <animateTransform attributeName="transform" type="translate" values="0 0;0 -.5;0 0;0 .5;0 0" keyTimes="0;.25;.5;.75;1" calcMode="discrete" dur="1.6s" repeatCount="indefinite"/>
+</g>
+<g id="right-hand">
+ <svg x="17" y="8" width="3.02" height="4.06" viewBox="652 306 116 156" preserveAspectRatio="none"><use xlink:href="#source"/></svg>
+ <animateTransform attributeName="transform" type="translate" values="0 0;0 -.5;0 0;0 .5;0 0" keyTimes="0;.25;.5;.75;1" calcMode="discrete" dur="1.6s" repeatCount="indefinite"/>
+</g>
+</svg>
