@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400" viewBox="0 0 20 20" shape-rendering="crispEdges">
+<title>Sticky – Gameplay Idle</title>
+<desc>Assembled from the separated parts in share-1.png. Transparent background. Body has three subtle idle poses; hands move counter to the body; feet stay fixed.</desc>
+<g id="feet">
+<image x="5" y="13" width="5" height="5" image-rendering="pixelated" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAP0lEQVR4nGP8//8/AzpgYWBgYBCw5IfLfDj+kZEJJrB7ySQGuAJ+C77/MGCQpP+f34LvPyO/BR+KoR+Of2QEAOgeHAJVuPXaAAAAAElFTkSuQmCC"/>
+<image x="11" y="13" width="5" height="5" image-rendering="pixelated" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAQ0lEQVR4nGP8//8/g4Al/38GKPhw/CMjE0xg95JJDAwMDBAF/BZ8/w2S9P/DAL8F339GdO0MDAwMjP//o/AZGBgYGABNsR9TniwIyQAAAABJRU5ErkJggg=="/>
+</g>
+<g id="body">
+<image x="5" y="1" width="11" height="10" image-rendering="pixelated" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAABAUlEQVR4nGWRoU/DUBDGf22Q77W1LXL41QxaQQIkCMQkwZCMVCDnQFdDzRY02RIciiAhWJLN8AdsEjYJ6fOH6PpWxpdc7nL3fXeXO0dEAAhSXwCUUhhjrP9+/3FYYasmnnbNKmW4PLuv6wSpL7XADVJflFIAhFFlTbw8DO1UVynFyeGSMAKtNd39quvuzgUAe0eZFbjGGDbRafUoioKyLLnt39Bp9QBw/zGB6XzM1fAarTV5njOdj9fkx2fF4uuv4PVpAMDbx53Nuc3THMQDW9Ba2/j4vF+dUETwE0/irC2T2UjirC1x1hY/8WQyG4mfeCIiiAjO5lPC7YjF53qn5uRfhr5nBOWyGgkAAAAASUVORK5CYII="/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 1;0 0;0 -1;0 0" keyTimes="0;0.25;0.5;0.75;1" calcMode="discrete" dur="1.6s" repeatCount="indefinite"/>
+</g>
+<g id="left-hand">
+<image x="0" y="7" width="4" height="5" image-rendering="pixelated" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAFCAYAAABirU3bAAAATklEQVR4nDXMMQ2AMBRAwZey91vAQTs2QQIuqgAJSEABIchhQgADTh4TJ+BQiZatvahCtOz1HKrWXkwA97uwngMACaCOG/O0A8B/RMuqfCI2IVOTPBn1AAAAAElFTkSuQmCC"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -1;0 0;0 1;0 0" keyTimes="0;0.25;0.5;0.75;1" calcMode="discrete" dur="1.6s" repeatCount="indefinite"/>
+</g>
+<g id="right-hand">
+<image x="17" y="8" width="3" height="4" image-rendering="pixelated" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAYAAABLLYUHAAAAOUlEQVR4nGM0SNL/f//afQYGBgYGFgYGBobuFiYGA4UJDEwMDAwMN29+YnCNyYNw9p7VZWBgYGAAAFxFC7me534fAAAAAElFTkSuQmCC"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -1;0 0;0 1;0 0" keyTimes="0;0.25;0.5;0.75;1" calcMode="discrete" dur="1.6s" repeatCount="indefinite"/>
+</g>
+</svg>
