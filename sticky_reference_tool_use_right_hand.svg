@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="640" height="640" viewBox="0 0 640 640"
+     shape-rendering="crispEdges">
+  <title>Sticky – Tool Use Reference (Right Hand)</title>
+  <desc>Static reference based on the original share-1.png sprite sheet. The right hand is designated for future tool use. Character artwork is displayed unchanged.</desc>
+  <image href="share-1.png" xlink:href="share-1.png"
+         x="0" y="0" width="640" height="640"
+         preserveAspectRatio="none"/>
+</svg>
