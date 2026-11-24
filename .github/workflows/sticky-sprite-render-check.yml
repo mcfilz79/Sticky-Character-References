@@ -1,0 +1,99 @@
+name: Sticky Sprite Render Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sticky-sprite-render-check.yml"
+      - "references/sticky_no_tool_22x20.svg"
+      - "references/sticky_no_tool_22x20_flipped.svg"
+      - "references/sticky_tool_use_right_hand_22x20.svg"
+      - "animations/sticky_idle_22x20.svg"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-and-inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install render and image tools
+        run: python -m pip install --disable-pip-version-check cairosvg pillow
+
+      - name: Render sprites and create pixel report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import cairosvg
+          from PIL import Image, ImageDraw
+
+          files = {
+              "no_tool": "references/sticky_no_tool_22x20.svg",
+              "no_tool_flipped": "references/sticky_no_tool_22x20_flipped.svg",
+              "tool_use": "references/sticky_tool_use_right_hand_22x20.svg",
+              "idle": "animations/sticky_idle_22x20.svg",
+          }
+          out = Path("sprite-render-report")
+          out.mkdir(exist_ok=True)
+          report = {}
+
+          for name, source in files.items():
+              svg = Path(source)
+              if not svg.exists():
+                  raise SystemExit(f"Missing required sprite: {source}")
+              png_path = out / f"{name}.png"
+              cairosvg.svg2png(url=str(svg), write_to=str(png_path),
+                               output_width=22, output_height=20)
+              im = Image.open(png_path).convert("RGBA")
+              alpha = im.getchannel("A")
+              bbox = alpha.getbbox()
+              occupied = sum(1 for a in alpha.getdata() if a > 0)
+              edge = {
+                  "left": any(alpha.getpixel((0, y)) > 0 for y in range(20)),
+                  "right": any(alpha.getpixel((21, y)) > 0 for y in range(20)),
+                  "top": any(alpha.getpixel((x, 0)) > 0 for x in range(22)),
+                  "bottom": any(alpha.getpixel((x, 19)) > 0 for x in range(22)),
+              }
+              report[name] = {
+                  "source": source,
+                  "render_size": list(im.size),
+                  "nontransparent_pixel_count": occupied,
+                  "visible_bounds_xyxy": list(bbox) if bbox else None,
+                  "touches_canvas_edge": edge,
+                  "note": "Idle SVG is rendered as its initial/static SVG frame; animation frames are not sampled."
+              }
+              im.resize((220, 200), Image.Resampling.NEAREST).save(out / f"{name}_10x.png")
+
+          sheet = Image.new("RGBA", (22 * 10 * 2, 20 * 10 * 2), (32, 32, 32, 255))
+          draw = ImageDraw.Draw(sheet)
+          names = list(files)
+          for i, name in enumerate(names):
+              x = (i % 2) * 220
+              y = (i // 2) * 200
+              tile = Image.open(out / f"{name}_10x.png").convert("RGBA")
+              sheet.alpha_composite(tile, (x, y))
+              draw.text((x + 4, y + 4), name, fill=(255, 255, 255, 255),
+                        stroke_width=1, stroke_fill=(0, 0, 0, 255))
+          sheet.convert("RGB").save(out / "contact-sheet.png")
+          (out / "pixel-report.json").write_text(
+              json.dumps(report, indent=2), encoding="utf-8")
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Upload render previews and report
+        uses: actions/upload-artifact@v4
+        with:
+          name: sticky-sprite-render-report
+          path: sprite-render-report/
+          if-no-files-found: error
+          retention-days: 14
