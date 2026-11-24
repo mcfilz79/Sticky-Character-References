@@ -7,7 +7,7 @@ Aktive Referenzen für Sticky's Rescue Quest. Veraltete, verworfene und experime
 Alle Gameplay-Sprites verwenden eine einheitliche transparente Sprite-Leinwand von **22×20 Pixeln**. Die Pixelgeometrie der Figur bleibt unverändert; die Leinwandgröße ist nicht mit einer Hintergrundgrafik zu verwechseln.
 
 - `references/sticky_no_tool_22x20.svg` – statische Referenz ohne Werkzeug; beide Hände sind frei.
-- `references/sticky_no_tool_22x20_flipped.svg` – dieselbe Referenz horizontal gespiegelt; der Figurenanker bleibt beim Richtungswechsel an derselben horizontalen Position.
+- `references/sticky_no_tool_22x20_flipped.svg` – dieselbe Referenz horizontal gespiegelt.
 - `references/sticky_tool_use_right_hand_22x20.svg` – statische Werkzeughaltung; die rechte Hand ist dafür angepasst.
 - `animations/sticky_idle_22x20.svg` – Gameplay-Idle-Animation.
 
