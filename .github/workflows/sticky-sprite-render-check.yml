@@ -33,6 +33,7 @@ jobs:
         run: |
           python - <<'PY'
           import json
+          import xml.etree.ElementTree as ET
           from pathlib import Path
           import cairosvg
           from PIL import Image, ImageDraw
@@ -74,6 +75,61 @@ jobs:
               }
               im.resize((220, 200), Image.Resampling.NEAREST).save(out / f"{name}_10x.png")
 
+          # Sample all five discrete positions of the two SVG animations without
+          # changing the repository source. Each animation is replaced only in-memory
+          # by its corresponding static transform for the sampled frame.
+          idle_source = Path(files["idle"]).read_text(encoding="utf-8")
+          ns = "{http://www.w3.org/2000/svg}"
+          idle_root = ET.fromstring(idle_source)
+          anims = idle_root.findall(".//" + ns + "animateTransform")
+          expected = [
+              ("0 0", "0 0"),
+              ("0 .5", "0 -.5"),
+              ("0 0", "0 0"),
+              ("0 -.5", "0 .5"),
+              ("0 0", "0 0"),
+          ]
+          if len(anims) != 2:
+              raise SystemExit(f"Expected exactly 2 animateTransform elements; found {len(anims)}")
+          phase_images = []
+          phase_report = []
+          for idx, (body_value, hands_value) in enumerate(expected):
+              root = ET.fromstring(idle_source)
+              nodes = root.findall(".//" + ns + "animateTransform")
+              for node, value in zip(nodes, (body_value, hands_value)):
+                  parent = next(p for p in root.iter() if node in list(p))
+                  parent.set("transform", "translate(" + value + ")")
+                  parent.remove(node)
+              svg_text = ET.tostring(root, encoding="unicode")
+              png_path = out / f"idle_phase_{idx + 1}.png"
+              cairosvg.svg2png(bytestring=svg_text.encode("utf-8"), write_to=str(png_path),
+                               output_width=22, output_height=20)
+              im = Image.open(png_path).convert("RGBA")
+              im.resize((220, 200), Image.Resampling.NEAREST).save(out / f"idle_phase_{idx + 1}_10x.png")
+              alpha = im.getchannel("A")
+              bbox = alpha.getbbox()
+              phase_report.append({
+                  "phase": idx + 1,
+                  "body_translate": body_value,
+                  "hands_group_translate": hands_value,
+                  "nontransparent_pixel_count": sum(1 for a in alpha.getdata() if a > 0),
+                  "visible_bounds_xyxy": list(bbox) if bbox else None,
+                  "touches_canvas_edge": {
+                      "left": any(alpha.getpixel((0, y)) > 0 for y in range(20)),
+                      "right": any(alpha.getpixel((21, y)) > 0 for y in range(20)),
+                      "top": any(alpha.getpixel((x, 0)) > 0 for x in range(22)),
+                      "bottom": any(alpha.getpixel((x, 19)) > 0 for x in range(22)),
+                  }
+              })
+              phase_images.append(Image.open(out / f"idle_phase_{idx + 1}_10x.png").convert("RGBA"))
+          phase_sheet = Image.new("RGBA", (220 * 5, 200), (32, 32, 32, 255))
+          for idx, tile in enumerate(phase_images):
+              phase_sheet.alpha_composite(tile, (idx * 220, 0))
+          phase_sheet.convert("RGB").save(out / "idle-animation-5-phases.png")
+          report["idle_animation_phases"] = phase_report
+          (out / "pixel-report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+          print(json.dumps(report, indent=2))
+
           sheet = Image.new("RGBA", (22 * 10 * 2, 20 * 10 * 2), (32, 32, 32, 255))
           draw = ImageDraw.Draw(sheet)
           names = list(files)
@@ -85,9 +141,6 @@ jobs:
               draw.text((x + 4, y + 4), name, fill=(255, 255, 255, 255),
                         stroke_width=1, stroke_fill=(0, 0, 0, 255))
           sheet.convert("RGB").save(out / "contact-sheet.png")
-          (out / "pixel-report.json").write_text(
-              json.dumps(report, indent=2), encoding="utf-8")
-          print(json.dumps(report, indent=2))
           PY
 
       - name: Upload render previews and report
