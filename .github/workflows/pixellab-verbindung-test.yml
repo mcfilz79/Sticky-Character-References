@@ -1,0 +1,40 @@
+name: PixelLab API Verbindung testen
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  connection-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PixelLab API ohne Generierung prüfen
+        env:
+          PIXELLAB_SECRET: ${{ secrets.PIXELLAB_SECRET }}
+        run: |
+          if [ -z "$PIXELLAB_SECRET" ]; then
+            echo "::error::GitHub Secret PIXELLAB_SECRET fehlt oder ist leer."
+            exit 1
+          fi
+
+          response_file="$(mktemp)"
+          status_code="$(curl --silent --show-error \
+            --output "$response_file" \
+            --write-out "%{http_code}" \
+            --header "Authorization: Bearer $PIXELLAB_SECRET" \
+            --header "Accept: application/json" \
+            "https://api.pixellab.ai/v2/balance")"
+
+          unset PIXELLAB_SECRET
+
+          if [ "$status_code" != "200" ]; then
+            echo "::error::PixelLab-Verbindung fehlgeschlagen (HTTP $status_code). Antwort wird aus Sicherheitsgründen nicht ausgegeben."
+            rm -f "$response_file"
+            exit 1
+          fi
+
+          echo "PixelLab API erreichbar; Authentifizierung erfolgreich."
+          echo "Es wurde keine Generierung gestartet und kein Guthaben verbraucht."
+          rm -f "$response_file"
